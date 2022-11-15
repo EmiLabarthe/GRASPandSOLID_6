@@ -75,6 +75,10 @@ namespace Full_GRASP_And_SOLID;
         }
         private TimerAdapter timerClient;
         private CountdownTimer timer;
+        
+        // Para lograr el ejercicio sin modificar el tipo de Recipe y las clases en CountownTimer, usé ISP.
+        // Consitió en crear una clase anidada, llamada "TimerAdapter", como en el ejemplo de la lectura de ISP.
+        // Esta clase anidada hace que la clase Recipe se pueda comunicar con CountdownTimer, reduciendo la posibilidad de romper el código.
         public void Cook()
         {
             this.timerClient = new TimerAdapter(this);
