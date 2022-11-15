@@ -6,9 +6,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
-namespace Full_GRASP_And_SOLID
-{
+namespace Full_GRASP_And_SOLID;
+
     public class Recipe : IRecipeContent // Modificado por DIP
     {
         // Cambiado por OCP
@@ -72,9 +73,24 @@ namespace Full_GRASP_And_SOLID
             }
             return result;
         }
+        private TimerAdapter timerClient;
+        private CountdownTimer timer;
         public void Cook()
         {
-            
+            this.timerClient = new TimerAdapter(this);
+            this.timer = new CountdownTimer();
+            this.timer.Register(this.GetCookTime(), this.timerClient);
         } 
+        private class TimerAdapter: TimerClient
+        {
+            private Recipe recipe;
+            public TimerAdapter(Recipe recipe)
+            {
+                this.recipe = recipe;
+            }
+            public void TimeOut()
+            {
+                this.recipe.Cooked = true;
+            }
+        }
     }
-}
