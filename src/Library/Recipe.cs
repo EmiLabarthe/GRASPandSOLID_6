@@ -88,6 +88,7 @@ namespace Full_GRASP_And_SOLID;
         // Esta clase anidada hace que la clase Recipe se pueda comunicar con CountdownTimer, reduciendo la posibilidad de romper el código.
         public void Cook()
         {
+            if(this.cooked) throw new InvalidOperationException("Ya está cocido");
             this.timerClient = new TimerAdapter(this);
             this.timer = new CountdownTimer();
             this.timer.Register(this.GetCookTime(), this.timerClient);
