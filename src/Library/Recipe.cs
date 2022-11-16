@@ -14,7 +14,14 @@ namespace Full_GRASP_And_SOLID;
     {
         // Cambiado por OCP
         private IList<BaseStep> steps = new List<BaseStep>();
-        public bool Cooked {get; set;}
+        private bool cooked = false;
+        public bool Cooked
+        {
+            get
+            {
+                return this.cooked;
+            }
+        }
 
         public Product FinalProduct { get; set; }
 
@@ -94,7 +101,7 @@ namespace Full_GRASP_And_SOLID;
             }
             public void TimeOut()
             {
-                this.recipe.Cooked = true;
+                this.recipe.cooked = true;
             }
         }
     }
